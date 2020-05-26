@@ -36,3 +36,11 @@ Limitations:
     
     If the there are no hastags, then it will be searched under book name.
     This can be extended to be searched under all the links
+    
+Using EventFiringWebDriver instead of WebDriver, so that all the event logs can be logged automatically.
+
+Interfaces right now have very minimal or no methods, because of less scope.
+
+A basic report will be created at test-output/Extent.html
+
+chromedriver installed is for mac machines.

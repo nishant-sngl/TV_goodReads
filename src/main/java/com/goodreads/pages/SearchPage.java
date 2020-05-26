@@ -29,10 +29,10 @@ public class SearchPage extends BasePage {
     @FindBy(id = "search_query_main")
     WebElement searchBar;
 
-    @FindBy(id = "bookTitle")
+    @FindBy(className = "bookTitle")
     List<WebElement> booksLink;
 
-    @FindBy(id = "groupName")
+    @FindBy(className = "groupName")
     List<WebElement> groupLink;
 
     @FindBy(xpath = "//a[@class='authorOrTitle' and contains(@href,'book')]")
@@ -68,6 +68,10 @@ public class SearchPage extends BasePage {
         }
         driver.findElement(By.id(id)).click();
     }
+
+    /**
+     * This will close the unwanted login popup coming on the search page.
+     */
     public void closeLoginPopup(){
         try {
             wait.until(ExpectedConditions.elementToBeClickable(loginPopupCloseBtn));
@@ -77,7 +81,7 @@ public class SearchPage extends BasePage {
     }
 
     public ArrayList<String> getBooksList(List<WebElement> elements){
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         for (WebElement ele:
                 elements) {
             list.add(ele.getAttribute("href"));
@@ -91,6 +95,13 @@ public class SearchPage extends BasePage {
         searchBar.submit();
     }
 
+    /**
+     * This will search the string mapped to every hashtag in its corresponding filter on search page.
+     * Then on every search, the list of book urls will be stored in a list.
+     * After these 2 iterations, urls will be stored in a map along with their count.
+     * @param map
+     * @return
+     */
     public HashMap<String, Integer> getBooksListFromAllSearches(Map<String, String> map){
         HashMap<String, Integer> booksUrlMap = new HashMap<String, Integer>();
         for (Map.Entry<String, String> m:

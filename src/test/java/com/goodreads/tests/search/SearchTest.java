@@ -21,15 +21,21 @@ public class SearchTest extends Base {
         init();
         homePage= new HomePage();
     }
+
+    /**
+     * Test case to search the book name on the basis of hashtags given.
+     */
     @Test
     private void searchBook(){
         String input = System.getProperty("input");
         Map<String, String> map = splitStringByHashTags(input);
+
         homePage.isPageOpen();
         searchPage = homePage.enterSearchText("");
         searchPage.closeLoginPopup();
         HashMap<String, Integer> urlMap = searchPage.getBooksListFromAllSearches(map);
 
+        // Sorting map on the basis of values.
         List<Map.Entry<String , Integer>> list = new LinkedList<>(urlMap.entrySet());
         Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
         {
@@ -39,6 +45,7 @@ public class SearchTest extends Base {
             }
         } );
 
+        //Printing the resultant output book url.
         for (Map.Entry<String, Integer> val:
              urlMap.entrySet()) {
             System.out.println("As per the given inputs, i guess the book name is: " + val.getKey());

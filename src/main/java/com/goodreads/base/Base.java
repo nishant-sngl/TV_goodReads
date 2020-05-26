@@ -10,7 +10,6 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -43,8 +42,8 @@ public abstract class Base implements TestInterface {
         driver.register(new WebdriverEventListener());
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Long.parseLong(prop.getProperty("wait")), TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(Long.parseLong(prop.getProperty("pageLoadTimeout")), TimeUnit.SECONDS);
 
         driver.get(baseUrl);
     }
@@ -55,6 +54,12 @@ public abstract class Base implements TestInterface {
         return;
     }
 
+    /**
+     * This function will split the string on the basis of the hashtags given.
+     * In case of no hashtags, then the string will be stored with #books
+     * @param s
+     * @return
+     */
     public static HashMap<String, String > splitStringByHashTags(String s){
         String[] strArr = s.split("#");
         HashMap<String, String > map = new HashMap<String, String>();

@@ -27,10 +27,19 @@ public class HomePage extends BasePage{
         return driver.getCurrentUrl();
     }
 
+    /**
+     * Check if the home page is open
+     * @return
+     */
     public boolean isPageOpen() {
         return logo.isDisplayed();
     }
 
+    /**
+     * Enter the given text in search bar and then click Enter.
+     * @param s
+     * @return
+     */
     public SearchPage enterSearchText(String s){
         searchField.sendKeys(s);
         searchField.submit();
