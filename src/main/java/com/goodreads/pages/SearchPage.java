@@ -29,6 +29,15 @@ public class SearchPage extends BasePage {
     @FindBy(id = "search_query_main")
     WebElement searchBar;
 
+    @FindBy(id = "bookTitle")
+    List<WebElement> booksLink;
+
+    @FindBy(id = "groupName")
+    List<WebElement> groupLink;
+
+    @FindBy(xpath = "//a[@class='authorOrTitle' and contains(@href,'book')]")
+    List<WebElement> quotesLink;
+
 //    String list1 = "//table[@class='tableList']//a[@class='";
 //    String list2 = "']";
 
@@ -89,19 +98,18 @@ public class SearchPage extends BasePage {
             ArrayList<String> list = new ArrayList<String>();
             String tag = m.getKey();
             String value = m.getValue();
-            System.out.println("checking for: " + tag + " : "+ value);
             enterSearchText(value);
             if (!tag.equals("books"))
                 clickOnFilterBy(tag);
             switch (tag){
                 case "books":
-                    list = getBooksList(driver.findElements(By.id("bookTitle")));
+                    list = getBooksList(booksLink);
                     break;
                 case "groups":
-                    list = getBooksList(driver.findElements(By.id("groupName")));
+                    list = getBooksList(groupLink);
                     break;
                 case "quotes":
-                    list = getBooksList(driver.findElements(By.xpath("//a[@class='authorOrTitle' and contains(@href,'book')]")));
+                    list = getBooksList(quotesLink);
                     break;
             }
             for (String l:

@@ -58,13 +58,17 @@ public abstract class Base implements TestInterface {
     public static HashMap<String, String > splitStringByHashTags(String s){
         String[] strArr = s.split("#");
         HashMap<String, String > map = new HashMap<String, String>();
-        for (String each: strArr){
-            int i = each.indexOf(" ");
-            if (i>0){
-                String tag = each.substring(0,i);
-                String text = each.substring(i+1,each.length());
-                map.put(tag,text.trim());
+        if (strArr.length!=0){
+            for (String each: strArr){
+                int i = each.indexOf(" ");
+                if (i>0){
+                    String tag = each.substring(0,i);
+                    String text = each.substring(i+1,each.length());
+                    map.put(tag,text.trim());
+                }
             }
+        }else {
+            map.put("books", s);
         }
         return map;
     }

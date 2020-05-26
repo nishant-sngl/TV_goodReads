@@ -23,15 +23,11 @@ public class SearchTest extends Base {
     }
     @Test
     private void searchBook(){
-//        String input = "#books book1 #groups grp1 #quotes quote1 #events event1 event2";
-        String input = "#books book1 #groups grp1 #quotes quote1";
+//        String input = "#books book1 #groups grp1 #quotes quote1";
+        String input = System.getProperty("input");
         Map<String, String> map = splitStringByHashTags(input);
-        for (Map.Entry<String, String> m:
-             map.entrySet()) {
-            System.out.println(m.toString());
-        }
         homePage.isPageOpen();
-        searchPage = homePage.enterSearchText(map.get("books"));
+        searchPage = homePage.enterSearchText("");
         searchPage.closeLoginPopup();
         HashMap<String, Integer> urlMap = searchPage.getBooksListFromAllSearches(map);
 
@@ -43,9 +39,10 @@ public class SearchTest extends Base {
                 return (o2.getValue()).compareTo( o1.getValue() );
             }
         } );
+
         for (Map.Entry<String, Integer> val:
              urlMap.entrySet()) {
-            System.out.println(val.getValue() + " : " + val.getKey());
+            System.out.println("As per the given inputs, i guess the book name is: " + val.getKey());
             break;
         }
     }
