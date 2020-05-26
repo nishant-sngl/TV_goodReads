@@ -23,7 +23,6 @@ public class SearchTest extends Base {
     }
     @Test
     private void searchBook(){
-//        String input = "#books book1 #groups grp1 #quotes quote1";
         String input = System.getProperty("input");
         Map<String, String> map = splitStringByHashTags(input);
         homePage.isPageOpen();
